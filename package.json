@@ -1,0 +1,20 @@
+{
+  "name": "stubs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "jade": "^1.11.0",
+    "morgan": "^1.8.2",
+    "path": "^0.12.7",
+    "request": "^2.82.0",
+    "serve-favicon": "^2.4.4",
+    "stubs": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
