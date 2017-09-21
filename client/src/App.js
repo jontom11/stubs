@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import TableView from './TableView';
+
 
 class App extends Component {
   constructor() {
@@ -29,10 +31,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
-          <RaisedButton label="Primary" primary={true} onClick={this.clickButtonHandler}/>
-          <button onClick={this.clickButtonHandler}> CLick Here! </button>
+          <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
+          <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
+          <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
+          <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
         </div>
         <div>
           <h1>Users</h1>
@@ -40,6 +43,7 @@ class App extends Component {
             <div key={user.id}>{user.username}</div>
           )}
         </div>
+        <TableView tableData={this.state.data}/>
         <div id='eventList'>
           {this.state.data.map(event => 
             <div key={event.id}>{event.id+ ' ' + event.name}</div>
