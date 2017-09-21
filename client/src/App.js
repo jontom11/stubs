@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class App extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+          <RaisedButton label="Primary" primary={true} onClick={this.clickButtonHandler}/>
           <button onClick={this.clickButtonHandler}> CLick Here! </button>
         </div>
         <div>
