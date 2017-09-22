@@ -12,10 +12,12 @@ class App extends Component {
     this.state = {
       users:[],
       data: [],
-      eventName: ''
+      eventName: '',
+      eventLocation: ''
     };
     
     this.eventNameChangeHandler = this.eventNameChangeHandler.bind(this);
+    this.eventLocationChangeHandler = this.eventLocationChangeHandler.bind(this);
     this.clickButtonHandler = this.clickButtonHandler.bind(this);
   }
 
@@ -29,12 +31,16 @@ class App extends Component {
     this.setState({eventName: e.target.value})
   }
 
+  eventLocationChangeHandler(e) {
+    this.setState({eventLocation: e.target.value})
+  }
+
   clickButtonHandler() {
-    axios.post('/api', {eventName: this.state.eventName})
+    axios.post('/api', {eventName: this.state.eventName, eventLocation: this.state.eventLocation})
     .then(res => this.setState({ data: res.data.events }))    
 
-    axios.post('/eventChange', {eventName: this.state.eventName})
-    .then(res => console.log('axios eventChange post request',res.data))   
+    // axios.post('/eventChange', {eventName: this.state.eventName)
+    // .then(res => console.log('axios eventChange post request',res.data))   
   }
 
   render() {
@@ -43,8 +49,8 @@ class App extends Component {
         <div className="App-header">
           <h2>Welcome to React</h2>
           <div><TextField hintText="Hint Text" floatingLabelText="Event Name" onChange={this.eventNameChangeHandler}/></div>
-          <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
-          <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
+          <div><TextField hintText="Hint Text" floatingLabelText="Location" onChange={this.eventLocationChangeHandler}/></div>
+          <div><TextField hintText="Hint Text" floatingLabelText="Price"/></div>
           <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
         </div>
         <div>
@@ -54,11 +60,6 @@ class App extends Component {
           )}
         </div>
         <TableView tableData={this.state.data}/>
-        <div id='eventList'>
-          {this.state.data.map(event => 
-            <div key={event.id}>{event.id+ ' ' + event.name}</div>
-          )}
-        </div>
       </div>
     );
   }
