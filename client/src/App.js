@@ -11,9 +11,11 @@ class App extends Component {
     super();
     this.state = {
       users:[],
-      data: []
+      data: [],
+      eventName: ''
     };
     
+    this.eventNameChangeHandler = this.eventNameChangeHandler.bind(this);
     this.clickButtonHandler = this.clickButtonHandler.bind(this);
   }
 
@@ -22,9 +24,17 @@ class App extends Component {
     .then(users => this.setState({ users: users.data }));
   }
 
+  eventNameChangeHandler(e) {
+    // console.log(e.target.value)
+    this.setState({eventName: e.target.value})
+  }
+
   clickButtonHandler() {
-    axios.get('/api')
+    axios.post('/api', {eventName: this.state.eventName})
     .then(res => this.setState({ data: res.data.events }))    
+
+    axios.post('/eventChange', {eventName: this.state.eventName})
+    .then(res => console.log('axios eventChange post request',res.data))   
   }
 
   render() {
@@ -32,7 +42,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Welcome to React</h2>
-          <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
+          <div><TextField hintText="Hint Text" floatingLabelText="Event Name" onChange={this.eventNameChangeHandler}/></div>
           <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
           <div><TextField hintText="Hint Text" floatingLabelText="Event Name"/></div>
           <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
