@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
-var eventChange = require('./routes/eventChange');
+var eventListing = require('./routes/eventListing');
 
 var app = express();
 
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/api', api);
-app.use('/eventChange', eventChange);
+app.use('/eventListing', eventListing);
 
   // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

@@ -17,7 +17,7 @@ class TableView extends Component{
     return (
       <div>
         This is where the Table goes!
-        {console.log(this.props.tableData)}
+        {console.log('this.props.data', this.props.data)}
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow >
@@ -29,7 +29,7 @@ class TableView extends Component{
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}> 
-            {this.props.tableData.map(event => (
+            {this.props.data.tableData.map(event => (
               <TableRow key={event.id}>
                 <TableRowColumn style={{width:'10%', whiteSpace: "normal", textAlign:'center'}}>{event.id}</TableRowColumn>
                 <TableRowColumn style={{width:'30%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.name}</TableRowColumn>

@@ -12,12 +12,15 @@ class App extends Component {
     this.state = {
       users:[],
       data: [],
+      eventListing: [],
       eventName: '',
-      eventLocation: ''
+      eventLocation: '',
+      eventRadius: ''
     };
     
     this.eventNameChangeHandler = this.eventNameChangeHandler.bind(this);
     this.eventLocationChangeHandler = this.eventLocationChangeHandler.bind(this);
+    this.eventRadiusChangeHandler = this.eventRadiusChangeHandler.bind(this);
     this.clickButtonHandler = this.clickButtonHandler.bind(this);
   }
 
@@ -27,7 +30,6 @@ class App extends Component {
   }
 
   eventNameChangeHandler(e) {
-    // console.log(e.target.value)
     this.setState({eventName: e.target.value})
   }
 
@@ -35,12 +37,17 @@ class App extends Component {
     this.setState({eventLocation: e.target.value})
   }
 
-  clickButtonHandler() {
-    axios.post('/api', {eventName: this.state.eventName, eventLocation: this.state.eventLocation})
-    .then(res => this.setState({ data: res.data.events }))    
+  eventRadiusChangeHandler(e) {
+    this.setState({eventRadius: e.target.value})
+  }
 
-    // axios.post('/eventChange', {eventName: this.state.eventName)
-    // .then(res => console.log('axios eventChange post request',res.data))   
+  clickButtonHandler() {
+    axios.post('/api', {eventName: this.state.eventName, eventLocation: this.state.eventLocation, eventRadius: this.state.eventRadius})
+    .then(res => this.setState({ data: res.data.events }))
+
+    axios.post('/eventListing', {eventName: this.state.eventListing})
+    .then(res => this.setState({eventListing: res.data}))
+    // .then(res => console.log('axios eventChange post request',res.data))
   }
 
   render() {
@@ -48,8 +55,9 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Welcome to React</h2>
-          <div><TextField hintText="Hint Text" floatingLabelText="Event Name" onChange={this.eventNameChangeHandler}/></div>
-          <div><TextField hintText="Hint Text" floatingLabelText="Location" onChange={this.eventLocationChangeHandler}/></div>
+          <div><TextField className='textField' hintText="Hint Text" floatingLabelText="Event Name" onChange={this.eventNameChangeHandler}/></div>
+          <div><TextField className='textField' hintText="Hint Text" floatingLabelText="Location" onChange={this.eventLocationChangeHandler}/>
+            <TextField className='textField' hintText="Hint Text" floatingLabelText="Radius" onChange={this.eventRadiusChangeHandler}/></div>
           <div><TextField hintText="Hint Text" floatingLabelText="Price"/></div>
           <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
         </div>
@@ -59,7 +67,7 @@ class App extends Component {
             <div key={user.id}>{user.username}</div>
           )}
         </div>
-        <TableView tableData={this.state.data}/>
+        <TableView data={{tableData: this.state.data, listingData: this.state.eventListing}} />
       </div>
     );
   }
