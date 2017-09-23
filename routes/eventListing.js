@@ -8,7 +8,7 @@ let stubhub = require('../config')
 router.post('/', function(req, res, next) {
 
   let options = {
-    url: 'https://api.stubhub.com/search/inventory/v2?eventid=9717163',
+    url: 'https://api.stubhub.com/search/inventory/v2?eventid=103020209&pricemax=40&sort=currentprice%20asc',
     headers: {
       // Authorization: 'Bearer '+ stubhub.App_Token
       Authorization: 'Bearer c0a11ca9-e003-3f6c-8fde-056c0ceb8220'
@@ -16,9 +16,10 @@ router.post('/', function(req, res, next) {
   }
 
   request(options, function(error, response, body) {
+    console.log('eventListing Post request response body', JSON.parse(body))
     if (!error) {
       res.send(body);
-      console.log(JSON.parse(body))
+      // console.log(JSON.parse(body))
     } else if (err) {
       console.log(err);
     }
