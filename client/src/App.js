@@ -4,6 +4,9 @@ import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import TableView from './TableView';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
+import EventPage from './EventPage';
 
 
 class App extends Component {
@@ -52,23 +55,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-          <div><TextField className='textField' hintText="Hint Text" floatingLabelText="Event Name" onChange={this.eventNameChangeHandler}/></div>
-          <div><TextField className='textField' hintText="Hint Text" floatingLabelText="Location" onChange={this.eventLocationChangeHandler}/>
-            <TextField className='textField' hintText="Hint Text" floatingLabelText="Radius" onChange={this.eventRadiusChangeHandler}/></div>
-          <div><TextField hintText="Hint Text" floatingLabelText="Price"/></div>
-          <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
+      <Router>
+        <div className="App">
+          <Route path='/123' component={EventPage} />
+          <div className="App-header">
+            <h2>Welcome to React</h2>
+            <div><TextField className='textField' hintText="Hint Text" floatingLabelText="Event Name" onChange={this.eventNameChangeHandler}/></div>
+            <div><TextField className='textField' hintText="Hint Text" floatingLabelText="Location" onChange={this.eventLocationChangeHandler}/>
+              <TextField className='textField' hintText="Hint Text" floatingLabelText="Radius" onChange={this.eventRadiusChangeHandler}/></div>
+            <div><TextField hintText="Hint Text" floatingLabelText="Price"/></div>
+            <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
+          </div>
+          <div>
+            <h1>Users</h1>
+            {this.state.users.map(user=> 
+              <div key={user.id}>{user.username}</div>
+            )}
+          </div>
+          <TableView data={{tableData: this.state.data, listingData: this.state.eventListing}} />
         </div>
-        <div>
-          <h1>Users</h1>
-          {this.state.users.map(user=> 
-            <div key={user.id}>{user.username}</div>
-          )}
-        </div>
-        <TableView data={{tableData: this.state.data, listingData: this.state.eventListing}} />
-      </div>
+      </Router>
     );
   }
 }
