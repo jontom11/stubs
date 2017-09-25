@@ -8,7 +8,7 @@ let stubhub = require('../config')
 router.post('/', function(req, res, next) {
   console.log('api post successful!', req.body.eventName, req.body.eventLocation, req.body.eventRadius)
   let options = {
-    url: 'https://api.stubhub.com/search/catalog/events/v3?status=active%20|contingent&q='+req.body.eventName+'&start=0&rows=20&geoExpansion=false&sort=eventDateLocal%20asc&radius='+req.body.eventRadius+'&city='+req.body.eventLocation+'&postalCode=91765',
+    url: 'https://api.stubhub.com/search/catalog/events/v3?status=active%20|contingent&q='+req.body.eventName+'&start=0&rows=20&geoExpansion=false&sort=eventDateLocal%20asc&radius='+req.body.eventRadius+'&city='+req.body.eventLocation,//+'&postalCode=91765',
     // OG REQUEST 
     // url: 'https://api.stubhub.com/search/catalog/events/v3?status=active%20|contingent&name=angels&start=0&rows=200&geoExpansion=false&sort=popularity%20asc&radius=100&city=los%20angeles',
     headers: {

@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
     console.log('eventListing Post request response body', JSON.parse(body))
     if (!error) {
       res.send(body);
-      // console.log(JSON.parse(body))
+      // console.log('listing request response', JSON.parse(body))
     } else if (err) {
       console.log(err);
     }

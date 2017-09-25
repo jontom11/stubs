@@ -24,8 +24,7 @@ class TableView extends Component{
   render() {
     return (
       <div>
-        This is where the Table goes!
-        {console.log('this.props.data', this.props.data.tableData)}
+        {console.log('TableView this.props.data', this.props.data.tableData)}
         <Table >
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow >
@@ -33,7 +32,8 @@ class TableView extends Component{
               <TableHeaderColumn style={{width:'30%', textAlign:'center'}}>Name</TableHeaderColumn>
               <TableHeaderColumn style={{width:'20%', textAlign:'center'}}>Venue</TableHeaderColumn>
               <TableHeaderColumn style={{width:'20%', textAlign:'center'}}>Date</TableHeaderColumn>
-              {/*<TableHeaderColumn>picture</TableHeaderColumn>*/}
+              <TableHeaderColumn style={{width:'20%', textAlign:'center'}}>ticketInfo</TableHeaderColumn>
+              <TableHeaderColumn style={{width:'10%', textAlign:'center'}}>BUY IT!</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} onCellClick={this.TableRowClickHandler}> 
@@ -41,10 +41,11 @@ class TableView extends Component{
               <TableRow key={event.id}>
                 {/*<TableRowColumn style={{width:'10%', whiteSpace: "normal", textAlign:'center'}}>{<Link to={`${event.id}`}>{event.id}</Link>}</TableRowColumn>*/}
                 <TableRowColumn style={{width:'10%', whiteSpace: "normal", textAlign:'center'}}>{event.id}</TableRowColumn>
-                <TableRowColumn style={{width:'30%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.name}</TableRowColumn>
-                <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.venue.name}</TableRowColumn>
+                <TableRowColumn style={{width:'30%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.name}</TableRowColumn>'
+                <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.venue.name+' - '+event.venue.city+', '+event.venue.state}</TableRowColumn>
                 <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.eventDateLocal}</TableRowColumn>
-                {/*<TableRowColumn>{<img src={event.images[0].url}/>}</TableRowColumn>*/}
+                <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.ticketInfo}</TableRowColumn>
+                <TableRowColumn style={{width:'10%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{<a href={'http://www.stubhub.com/'+event.webURI}>Buy Here!</a>}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
