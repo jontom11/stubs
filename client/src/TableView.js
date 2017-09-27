@@ -7,7 +7,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import {BrowserRouter as Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 class TableView extends Component{
@@ -21,10 +21,23 @@ class TableView extends Component{
     console.log('TableRowClickHandler')
   }
 
+  DateConverter(date){
+    date = date.split('-')
+    // let ampm = 'am';
+    // if (Number(date[2].slice(3,4)) > 11) {
+    //   ampm = 'pm';
+    // }
+    let reDate = date[1]+'/'+date[2].slice(0,2)+'/'+date[0]+'@'+date[2].slice(3,11)//+ampm
+    return JSON.stringify(reDate)
+  }
+
   render() {
+    var trcStyle = {whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'};
+
     return (
       <div>
         {console.log('TableView this.props.data', this.props.data.tableData)}
+        <Link to='/FU'> Click </Link>
         <Table >
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow >
@@ -40,12 +53,12 @@ class TableView extends Component{
             {this.props.data.tableData.map(event => (
               <TableRow key={event.id}>
                 {/*<TableRowColumn style={{width:'10%', whiteSpace: "normal", textAlign:'center'}}>{<Link to={`${event.id}`}>{event.id}</Link>}</TableRowColumn>*/}
-                <TableRowColumn style={{width:'10%', whiteSpace: "normal", textAlign:'center'}}>{event.id}</TableRowColumn>
-                <TableRowColumn style={{width:'30%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.name}</TableRowColumn>'
-                <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.venue.name+' - '+event.venue.city+', '+event.venue.state}</TableRowColumn>
-                <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.eventDateLocal}</TableRowColumn>
-                <TableRowColumn style={{width:'20%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{event.ticketInfo}</TableRowColumn>
-                <TableRowColumn style={{width:'10%', whiteSpace: "normal", wordWrap:'break-word', textAlign:'center'}}>{<a href={'http://www.stubhub.com/'+event.webURI}>Buy Here!</a>}</TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'10%'}> {<Link to={'/'+event.id}>{event.id}</Link>} </TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'30%'}> {<Link to={'/'+event.id}>{event.name}</Link>}</TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'20%'}> {event.venue.name+' - '+event.venue.city+', '+event.venue.state}</TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'20%'}> {this.DateConverter(event.eventDateUTC)}</TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'20%'}> {<Link to={'/'+event.id}>{event.ticketInfo}</Link>}</TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'10%'}>{<a href={'http://www.stubhub.com/'+event.webURI}>Buy Here!</a>}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>

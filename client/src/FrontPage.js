@@ -1,14 +1,10 @@
 // NOT YET READY! No Route. Imports are not done. View Must change on Route. 
 
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import TableView from './TableView';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
-import EventPage from './EventPage';
 
 class FrontPage extends Component {
   constructor() {
@@ -64,10 +60,8 @@ class FrontPage extends Component {
               <TextField className='textField' hintText="Hint Text" floatingLabelText="Radius" onChange={this.eventRadiusChangeHandler}/></div>
             <div><TextField hintText="Hint Text" floatingLabelText="Price"/></div>
             <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
-            {/*<RaisedButton label="Route" primary={true} onClick={<a href="/123"/>} />*/}
-            <a href="/123">Click Here</a>
+            {/*<a href="/123">Click Here</a>*/}
           </div>
-          {/*<TableView />*/}
           <TableView data={{tableData: this.state.data, listingData: this.state.eventListing}} />
         </div>
     )
