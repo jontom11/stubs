@@ -37,7 +37,7 @@ class TableView extends Component{
     return (
       <div>
         {console.log('TableView this.props.data', this.props.data.tableData)}
-        <Link to='/FU'> Click </Link>
+        {console.log('TableView this.props.ticketInfo', this.props.data.ticketInfo)}
         <Table >
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow >
@@ -50,14 +50,14 @@ class TableView extends Component{
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} onCellClick={this.TableRowClickHandler}> 
-            {this.props.data.tableData.map(event => (
+            {this.props.data.tableData.map( (event, index) => (
               <TableRow key={event.id}>
                 {/*<TableRowColumn style={{width:'10%', whiteSpace: "normal", textAlign:'center'}}>{<Link to={`${event.id}`}>{event.id}</Link>}</TableRowColumn>*/}
                 <TableRowColumn style={trcStyle} width={'10%'}> {<Link to={'/'+event.id}>{event.id}</Link>} </TableRowColumn>
                 <TableRowColumn style={trcStyle} width={'30%'}> {<Link to={'/'+event.id}>{event.name}</Link>}</TableRowColumn>
                 <TableRowColumn style={trcStyle} width={'20%'}> {event.venue.name+' - '+event.venue.city+', '+event.venue.state}</TableRowColumn>
                 <TableRowColumn style={trcStyle} width={'20%'}> {this.DateConverter(event.eventDateUTC)}</TableRowColumn>
-                <TableRowColumn style={trcStyle} width={'20%'}> {<Link to={'/'+event.id}>{event.ticketInfo}</Link>}</TableRowColumn>
+                <TableRowColumn style={trcStyle} width={'20%'}>  {'$'+this.props.data.ticketInfo[index].ticketInfo.minListPrice}  </TableRowColumn>
                 <TableRowColumn style={trcStyle} width={'10%'}>{<a href={'http://www.stubhub.com/'+event.webURI}>Buy Here!</a>}</TableRowColumn>
               </TableRow>
             ))}

@@ -12,6 +12,7 @@ class FrontPage extends Component {
     this.state = {
       users:[],
       data: [],
+      ticketInfo: [],
       eventListing: [],
       eventName: '',
       eventLocation: '',
@@ -43,11 +44,15 @@ class FrontPage extends Component {
 
   clickButtonHandler() {
     axios.post('/api', {eventName: this.state.eventName, eventLocation: this.state.eventLocation, eventRadius: this.state.eventRadius})
-    .then(res => this.setState({ data: res.data.events }))
+    .then(res => this.setState({ data: res.data.events })) 
+    
+    axios.post('/ticketInfo', {eventName: this.state.eventName, eventLocation: this.state.eventLocation, eventRadius: this.state.eventRadius})
+//     .then(res => console.log('ticketInfo FrontPage api response', res.data.events))
+    .then(res => this.setState({ ticketInfo: res.data.events }))
 
-    axios.post('/eventListing', {eventName: this.state.eventListing})
-    .then(res => this.setState({eventListing: res.data}))
-    // .then(res => console.log('axios eventChange post request',res.data))
+//     axios.post('/eventListing', {eventName: this.state.eventListing})
+//     .then(res => this.setState({eventListing: res.data}))
+//     // .then(res => console.log('axios eventChange post request',res.data))
   }
 
   render() {
@@ -60,9 +65,8 @@ class FrontPage extends Component {
               <TextField className='textField' hintText="Hint Text" floatingLabelText="Radius" onChange={this.eventRadiusChangeHandler}/></div>
             <div><TextField hintText="Hint Text" floatingLabelText="Price"/></div>
             <RaisedButton label="Search" primary={true} onClick={this.clickButtonHandler}/>
-            {/*<a href="/123">Click Here</a>*/}
           </div>
-          <TableView data={{tableData: this.state.data, listingData: this.state.eventListing}} />
+          <TableView data={{tableData: this.state.data, listingData: this.state.eventListing, ticketInfo: this.state.ticketInfo}} />
         </div>
     )
   }

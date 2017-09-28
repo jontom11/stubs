@@ -21,6 +21,7 @@ class EventPage extends Component {
     return(
       <div>
         Welcome to the Event Page for event #
+          {console.log('event Page props',this.props)}
         {/*{this.props.match.params.eventId}*/}
         {/*<h3>{this.props.match.params.eventId}</h3>*/}
         {/*<Table >

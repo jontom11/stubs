@@ -19,11 +19,10 @@ class App extends Component {
 
 componentWillMount() {
   let eventId = this.props.match.params.eventId
-  console.log('eventId in componentWillMount', eventId)
+  // Delete console log below when deploying this logs to the server terminal
+  //   console.log('eventId in componentWillMount', eventId)
   axios.post('/eventListing', {eventId: eventId})
-//   .then(res => this.setState({eventListing: res.data}))
-  .then(res => console.log(res.data))
-  // .then(res => console.log('axios eventChange post request',res.data))}
+  .then(res => this.setState({eventListing: res.data}))
 }
 
   render() {
@@ -31,7 +30,7 @@ componentWillMount() {
       <Router>
         <div className="App">
           Hey There!
-          <EventPage />
+          <EventPage eventListing={this.state.eventListing}/>
         </div>
       </Router>
     );

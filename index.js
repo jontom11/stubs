@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
 var eventListing = require('./routes/eventListing');
+var ticketInfo = require('./routes/ticketInfo');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/api', api);
 app.use('/eventListing', eventListing);
+app.use('/ticketInfo', ticketInfo);
 
   // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
